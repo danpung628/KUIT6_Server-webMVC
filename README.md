@@ -1,4 +1,5 @@
 # java-webMVC
+
 > KUIT 4기 서버 4~7주차 강의와 미션 수행을 위한 레포지토리입니다.
 
 - `step1-servlet-completed`
@@ -17,9 +18,13 @@
     - ModelAndView는 model이라는 Map 자료구조와 View를 갖는다
 
       model을 분리함으로써 사용자에게 보여줄 정보를 선택할 수 있음
-
-- `step6-mvc-handlerAdapter`
-    - 뷰 이름(String viewName)을 반환하는 컨트롤러
-    - ModelAndView를 반환하는 컨트롤러
+- `step6-mvc-viewResolver`
+    - model과 view를 분리
+    - 컨트롤러를 실행시킬 때 파라미터로 Map<String, String> params와 Map<String, Object> model을 넘긴다.
+    - 컨트롤러는 String viewName을 반환한다.
+    - DispatcherServlet이 viewResolver를 호출하여 viewName을 View 객체로 반환한다.
+- `step7-spring-mvc`
+    - ControllerV1 : ModelAndView를 반환하는 컨트롤러
+    - ControllerV2 : 뷰 이름(String viewName)을 반환하는 컨트롤러
 
   이것들을 모두 함께 사용하기 위해 HandlerAdapter를 도입
