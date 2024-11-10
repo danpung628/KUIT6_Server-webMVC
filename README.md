@@ -13,7 +13,7 @@
     - json을 반환하는 컨트롤러가 생김
 - `step4-mvc-view`
     - View 인터페이스를 만들고 각 컨트롤러는 View 구현체를 반환 (JspView, JsonView 등)
-- `step5-mvc-modelAndView`
+- `step5-answer-modelAndView`
     - 컨트롤러는 ModelAndView를 반환
     - ModelAndView는 model이라는 Map 자료구조와 View를 갖는다
 
