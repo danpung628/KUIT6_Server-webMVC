@@ -4,6 +4,7 @@
 # IntelliJ project files
 .idea
 *.iml
+*.iws
 out
 gen
 .DS_Store
