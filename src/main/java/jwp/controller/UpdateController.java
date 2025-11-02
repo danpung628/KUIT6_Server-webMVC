@@ -1,6 +1,6 @@
 package jwp.controller;
 
-import core.db.MemoryUserRepository;
+import jwp.dao.UserDao;
 import jwp.model.User;
 
 import javax.servlet.ServletException;
@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/user/update")
 public class UpdateController extends HttpServlet {
+    private final UserDao userDao = new UserDao();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -42,15 +44,18 @@ public class UpdateController extends HttpServlet {
             return;
         }
 
-        // 5. 사용자 정보 업데이트
-        User updateUser = new User(userId, password, name, email);
-        MemoryUserRepository repository = MemoryUserRepository.getInstance();
-        repository.changeUserInfo(updateUser);
+        try {
+            // 5. 사용자 정보 업데이트
+            User updateUser = new User(userId, password, name, email);
+            userDao.update(updateUser);
 
-        // 6. 세션 정보 업데이트
-        session.setAttribute("user", updateUser);
+            // 6. 세션 정보 업데이트
+            session.setAttribute("user", updateUser);
 
-        // 7. 사용자 목록 페이지로 리다이렉트
-        resp.sendRedirect("/user/list");
+            // 7. 사용자 목록 페이지로 리다이렉트
+            resp.sendRedirect("/user/list");
+        } catch (SQLException e) {
+            throw new ServletException("사용자 정보 수정 실패", e);
+        }
     }
 }

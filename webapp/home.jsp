@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!doctype html>
 <html lang="ko">
@@ -11,44 +12,39 @@
     <h2>Q&A</h2>
     <div class="qna-list">
         <ul class="list">
-            <li>
-                <div class="wrap">
-                    <div class="main">
-                        <strong class="subject">
-                            <a href="qna/show.jsp"> 객체지향을 가장 잘 다룬 책이 뭐가 있나요? </a>
-                        </strong>
-                        <div class="auth-info">
-                            <i class="icon-add-comment"></i>
-                            <span class="time">2024-09-29 23:11</span>
-                            <span clas="author">이영선</span>
-                            <!-- <a href="./user/profile.html" class="author">이영선</a> -->
-                        </div>
-                        <div class="reply" title="댓글">
-                            <i class="icon-reply"></i>
-                            <span class="point">12</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="wrap">
-                    <div class="main">
-                        <strong class="subject">
-                            <a href="qna/show.jsp"> 객체지향에서 가장 중요하다고 생각하는 것이 무엇인가요? </a>
-                        </strong>
-                        <div class="auth-info">
-                            <i class="icon-add-comment"></i>
-                            <span class="time">2024-09-29 23:55</span>
-                            <span class="author">이윤정</span>
-                            <!-- <a href="./user/profile.html" class="author">이윤정</a> -->
-                        </div>
-                        <div class="reply" title="댓글">
-                            <i class="icon-reply"></i>
-                            <span class="point">8</span>
+            <%-- 기존 하드코딩된 <li> 태그들을 모두 삭제하고 아래 코드로 대체 --%>
+            <c:forEach items="${questions}" var="question" varStatus="status">
+                <li>
+                    <div class="wrap">
+                        <div class="main">
+                            <strong class="subject">
+                                <a href="/qna/show?questionId=${question.questionId}">
+                                    ${question.title}
+                                </a>
+                            </strong>
+                            <div class="auth-info">
+                                <i class="icon-add-comment"></i>
+                                <span class="time">
+                                    <fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+                                                    value="${question.createdDate}"/>
+                                </span>
+                                <span class="author">${question.writer}</span>
+                            </div>
+                            <div class="reply" title="댓글">
+                                <i class="icon-reply"></i>
+                                <span class="point">${question.countOfAnswer}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </li>
+                </li>
+            </c:forEach>
+
+            <%-- 질문이 없을 때 메시지 표시 --%>
+            <c:if test="${empty questions}">
+                <li style="text-align: center; padding: 20px;">
+                    <p>등록된 질문이 없습니다.</p>
+                </li>
+            </c:if>
         </ul>
         <div class="row">
             <div class="col-md-5"></div>
@@ -68,7 +64,7 @@
                 </ul>
             </div>
             <div class="col-md-2 qna-write">
-                <a href="./qna/form.html" class="btn btn-primary pull-right" role="button">질문하기</a>
+                <a href="/qna/form" class="btn btn-primary pull-right" role="button">질문하기</a>
             </div>
         </div>
     </div>
