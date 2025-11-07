@@ -25,7 +25,7 @@ public class HomeController {
     public String listQuestions(Model model) throws Exception {
 
         model.addAttribute("questions", questionDao.findAll());
-        return "/";
+        return "home";
 
 
     }

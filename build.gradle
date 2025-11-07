@@ -25,7 +25,7 @@ dependencies {
 
     // 4. 데이터베이스 드라이버 (H2, MySQL 등 필요한 것 사용)
     runtimeOnly 'com.h2database:h2'
-    runtimeOnly 'mysql:mysql-connector-java'
+    runtimeOnly 'com.mysql:mysql-connector-j'
 
     // 5. Lombok (선택 사항이지만 강력히 추천)
     compileOnly 'org.projectlombok:lombok'
