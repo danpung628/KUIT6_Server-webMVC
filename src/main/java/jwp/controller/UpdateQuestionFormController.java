@@ -1,6 +1,5 @@
 package jwp.controller;
 
-import core.mvc.Controller;
 import jwp.dao.QuestionDao;
 import jwp.model.Question;
 import jwp.model.User;
@@ -9,7 +8,6 @@ import jwp.util.UserSessionUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Objects;
 
 
 public class UpdateQuestionFormController implements Controller {

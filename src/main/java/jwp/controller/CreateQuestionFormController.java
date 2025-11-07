@@ -1,6 +1,5 @@
 package jwp.controller;
 
-import core.mvc.Controller;
 import jwp.util.UserSessionUtils;
 
 import javax.servlet.http.HttpServletRequest;
